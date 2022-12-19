@@ -12,6 +12,8 @@ void push(struct stack *s, int x);
 int pop(struct stack *s);
 int viewTop(struct stack *s);
 void display(struct stack *s);
+int isStackEmpty(struct stack *s);
+int isStackFull(struct stack *s);
 
 int main()
 {
@@ -19,14 +21,17 @@ int main()
     s.top = -1;     // Initialising
 
     int choice, x;
-    while (choice != 5)
+    int empty, full;
+    while (choice != 7)
     {
         printf("\nStack Operations:\n");
         printf("1) push\n");
         printf("2) pop\n");
         printf("3) viewTop\n");
         printf("4) display\n");
-        printf("5) exit\n");
+        printf("5) isStackEmpty\n");
+        printf("6) isStackFull\n");
+        printf("7) exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
@@ -52,7 +57,17 @@ int main()
             display(&s);
             break;
 
-        case 5: // EXIT
+        case 5: // isStackEmpty
+            empty = isStackEmpty(&s);
+            printf("Stack Empty: %d\n", empty);
+            break;
+
+        case 6: // isStackFull
+            full = isStackFull(&s);
+            printf("Stack Full: %d\n", full);
+            break;
+
+        case 7: // EXIT
             printf("Exiting...\n");
             break;
 
@@ -146,4 +161,14 @@ void display(struct stack *s)
     // printf("]\n");
 
     return;
+}
+
+int isStackEmpty(struct stack *s)
+{
+    return s->top == -1;
+}
+
+int isStackFull(struct stack *s)
+{
+    return s->top == STACKSIZE - 1;
 }
